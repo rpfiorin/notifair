@@ -1,0 +1,248 @@
+object FrmAddList: TFrmAddList
+  Left = 0
+  Top = 0
+  ClientHeight = 500
+  ClientWidth = 375
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object btnVersion: TButton
+    Position.X = -26.000000000000000000
+    Position.Y = -2.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TintColor = claAntiquewhite
+  end
+  object lblTop: TLabel
+    Align = Top
+    StyledSettings = [Style]
+    Size.Width = 375.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Roboto'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = claCoral
+    Text = ' CADASTRO DE LISTAS'
+  end
+  object btnTop: TButton
+    Align = Top
+    Position.Y = 30.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 130.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    TintColor = claCornsilk
+  end
+  object lblTitle: TLabel
+    StyledSettings = []
+    Position.X = 119.000000000000000000
+    Position.Y = 71.000000000000000000
+    Size.Width = 140.000000000000000000
+    Size.Height = 43.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Rockwell'
+    TextSettings.Font.Size = 30.000000000000000000
+    TextSettings.Font.Style = [fsBold, fsItalic]
+    TextSettings.FontColor = claCoral
+    Text = 'NotiFair'
+  end
+  object lblCopy: TLabel
+    StyledSettings = []
+    Position.X = 222.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 17.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Rockwell'
+    TextSettings.Font.Size = 11.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.FontColor = claCoral
+    Text = #169
+  end
+  object lbBg: TListBox
+    Align = Client
+    Size.Width = 375.000000000000000000
+    Size.Height = 340.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 375.000000000000000000
+    Viewport.Height = 340.000000000000000000
+    object btnSave: TButton
+      Align = Bottom
+      StyledSettings = []
+      Position.Y = 295.000000000000000000
+      Size.Width = 375.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Salvar'
+      TextSettings.Font.Family = 'Roboto Lt'
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claWhite
+      TintColor = claCoral
+      OnClick = btnSaveClick
+    end
+    object lblBrand: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 57.000000000000000000
+      Position.Y = 141.000000000000000000
+      Size.Width = 64.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'M'#234's (N'#176'):'
+    end
+    object lblQtd: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 163.000000000000000000
+      Position.Y = 141.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Ano:'
+    end
+    object lblDesc: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 57.000000000000000000
+      Position.Y = 60.000000000000000000
+      Size.Width = 72.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Categoria:'
+    end
+    object cbxCat: TComboBox
+      Items.Strings = (
+        'Semanal'
+        'Quinzenal'
+        'Mensal')
+      Position.X = 56.000000000000000000
+      Position.Y = 85.000000000000000000
+      Size.Width = 257.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 33
+    end
+    object edtMonth: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 29
+      KeyboardType = NumberPad
+      MaxLength = 2
+      TextSettings.Font.Size = 16.000000000000000000
+      Position.X = 57.000000000000000000
+      Position.Y = 170.000000000000000000
+      Size.Width = 90.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+    end
+    object btnAddItem: TButton
+      Position.X = 268.000000000000000000
+      Position.Y = 143.000000000000000000
+      Size.Width = 47.000000000000000000
+      Size.Height = 34.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'stepperbuttonright'
+      TabOrder = 6
+      OnClick = btnAddItemClick
+    end
+    object lblNitems: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 208.000000000000000000
+      Position.Y = 232.000000000000000000
+      Size.Width = 33.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      Text = '<N>'
+      Visible = False
+    end
+    object lblItem: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 274.000000000000000000
+      Position.Y = 180.000000000000000000
+      Size.Width = 37.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Items'
+    end
+    object pbSaveList: TProgressBar
+      Orientation = Horizontal
+      Position.Y = -6.000000000000000000
+      Size.Width = 375.000000000000000000
+      Size.Height = 10.000000000000000000
+      Size.PlatformDefault = False
+    end
+    object lblAddedItens: TLabel
+      StyledSettings = [Family, FontColor]
+      Position.X = 128.000000000000000000
+      Position.Y = 232.000000000000000000
+      Size.Width = 81.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      Text = 'N'#186' de itens:'
+      Visible = False
+    end
+    object cbxYear: TComboBox
+      Position.X = 160.000000000000000000
+      Position.Y = 170.000000000000000000
+      Size.Width = 89.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 32
+    end
+  end
+  object tmrBar: TTimer
+    Enabled = False
+    OnTimer = tmrBarTimer
+    Left = 280
+    Top = 457
+  end
+  object uDqryYears: TUniQuery
+    Connection = DmData.uDconn_pg
+    SQL.Strings = (
+      'SELECT Extract'
+      '('
+      #39'year'#39' FROM now()'
+      ')')
+    Left = 328
+    Top = 296
+  end
+  object cdsItems: TClientDataSet
+    PersistDataPacket.Data = {
+      810000009619E0BD010000001800000004000000000003000000810009446573
+      63726963616F0100490000000100055749445448020002001400054D61726361
+      01004900000001000557494454480200020014000A5175616E74696461646501
+      00490000000100055749445448020002001400074475726163616F0400010000
+      0000000000}
+    Active = True
+    Aggregates = <>
+    Params = <>
+    Left = 336
+    object cdsItemsDescricao: TStringField
+      FieldName = 'Descricao'
+    end
+    object cdsItemsMarca: TStringField
+      FieldName = 'Marca'
+    end
+    object cdsItemsQuantidade: TStringField
+      FieldName = 'Quantidade'
+    end
+    object cdsItemsDuracao: TIntegerField
+      FieldName = 'Duracao'
+    end
+  end
+end

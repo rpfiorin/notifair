@@ -1,0 +1,205 @@
+unit uAddList;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, Data.DB, Uni,
+  Datasnap.DBClient, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Edit, FMX.Layouts,
+  FMX.ListBox, MemDS, DBAccess, System.DateUtils;
+
+type
+  TFrmAddList = class(TForm)
+    btnVersion: TButton;
+    lblTop: TLabel;
+    btnTop: TButton;
+    lblTitle: TLabel;
+    lblCopy: TLabel;
+    lbBg: TListBox;
+    btnSave: TButton;
+    lblBrand: TLabel;
+    lblQtd: TLabel;
+    lblDesc: TLabel;
+    cbxCat: TComboBox;
+    edtMonth: TEdit;
+    btnAddItem: TButton;
+    lblNitems: TLabel;
+    lblItem: TLabel;
+    pbSaveList: TProgressBar;
+    tmrBar: TTimer;
+    lblAddedItens: TLabel;
+    cbxYear: TComboBox;
+    uDqryYears: TUniQuery;
+    cdsItems: TClientDataSet;
+    cdsItemsDescricao: TStringField;
+    cdsItemsMarca: TStringField;
+    cdsItemsQuantidade: TStringField;
+    cdsItemsDuracao: TIntegerField;
+
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnAddItemClick(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure tmrBarTimer(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+
+    function CalcFinalDate(tList: String): TDate;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmAddList: TFrmAddList;
+
+implementation
+
+{$R *.fmx}
+
+uses uItemInfo, uDmData, uMain;
+
+procedure TFrmAddList.btnAddItemClick(Sender: TObject);
+begin
+  // Chama tela para adicao de item
+  ItemControl := 'I';
+
+  FrmItemInfo := TFrmItemInfo.Create(self);
+  FrmItemInfo.Show;
+end;
+
+procedure TFrmAddList.btnSaveClick(Sender: TObject);
+var
+ uDqryRegList: TUniQuery;
+begin
+ // Valida conteudo
+ if cdsItems.IsEmpty then
+ begin
+   ShowMessage('Lista vazia!');
+   Exit;
+ end;
+
+ // Valida campos
+ if (edtMonth.Text <> '') then
+  if Assigned(cbxCat.Selected) and Assigned(cbxYear.Selected) then
+  begin
+   // Instancia e conecta ao BD
+   uDqryRegList := TUniQuery.Create(nil);
+   uDqryRegList.Connection := DmData.uDconn_pg;
+
+   try
+    cdsItems.First;
+
+     uDqryRegList.SQL.Text := ' BEGIN';
+     uDqryRegList.ExecSQL;
+
+     uDqryRegList.SQL.Text := ' INSERT INTO public.lista_comp'+
+                              ' (categoria,mes,ano,dt_fim)'+
+                              ' VALUES('+
+                              QuotedStr(cbxCat.Selected.Text)+','+
+                              edtMonth.Text+','+cbxYear.Selected.Text+','+
+                              QuotedStr(FormatDateTime('YYYY-MM-DD',
+                              CalcFinalDate(cbxCat.Selected.Text)))+')';
+     uDqryRegList.ExecSQL;
+
+
+   while not cdsItems.Eof do
+   begin
+     uDqryRegList.SQL.Text := ' INSERT INTO public.item_lista'+
+                              ' (descricao,marca,quantidade,dur_dias,fk_lista)'+
+                              ' VALUES('+
+                              QuotedStr(cdsItemsDescricao.AsString)+','+
+                              QuotedStr(cdsItemsMarca.AsString)+','+
+                              QuotedStr(cdsItemsQuantidade.AsString)+','+
+                              cdsItemsDuracao.AsString+','+
+                              ' CURRVAL(''lista_comp_id_seq'') )';
+     uDqryRegList.ExecSQL;
+
+    cdsItems.Next;
+   end;
+     uDqryRegList.SQL.Text := ' COMMIT';
+     uDqryRegList.ExecSQL;
+
+     // Exibe progress bar
+     tmrBar.Enabled := True;
+
+   except
+     uDqryRegList.SQL.Text := ' ROLLBACK';
+     uDqryRegList.ExecSQL;
+
+     ShowMessage('Erro ao salvar!');
+   end;
+    uDqryRegList.Free;
+
+    // Limpa clientDataSet
+    cdsItems.Close;
+    cdsItems.CreateDataSet;
+
+    // Reseta var
+    Nitems := 0;
+  end;
+end;
+
+function TFrmAddList.CalcFinalDate(tList: String): TDate;
+begin
+  if (tList = 'Mensal') then
+   Result := Date+30
+  else
+  if (tList = 'Quinzenal') then
+   Result := Date+15
+  else
+   Result := Date+7;
+end;
+
+procedure TFrmAddList.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  uDqryYears.Close;
+  // Desaloca memoria
+  FreeAndNil(FrmAddList);
+
+  // Alerta o vencimento proximo
+  DmData.altMaturity;
+end;
+
+procedure TFrmAddList.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+ tmrBar.Enabled := False;
+
+  // Reseta contador
+  Nitems := 0;
+  lblNitems.Text := '<N>';
+  lblNitems.Visible := False;
+
+  //Atualiza grade de listas
+  FrmMain.uDqry_Lists.Refresh;
+end;
+
+procedure TFrmAddList.FormCreate(Sender: TObject);
+begin
+  // Ativa query
+  uDqryYears.Open;
+end;
+
+procedure TFrmAddList.FormShow(Sender: TObject);
+begin
+  // Popula comboBox
+  cbxYear.Items.Add(uDqryYears.Fields[0].AsString);
+  cbxYear.Items.Add(IntToStr(uDqryYears.Fields[0].AsInteger+1));
+end;
+
+procedure TFrmAddList.tmrBarTimer(Sender: TObject);
+begin
+  // Carrega progress bar
+  pbSaveList.Value := pbSaveList.Value + 70;
+
+  if (pbSaveList.Value = 100) then
+  begin
+   ShowMessage('Lista salva com sucesso');
+
+   FrmMain.uDqry_Lists.Refresh;
+   Close;
+  end;
+end;
+
+end.

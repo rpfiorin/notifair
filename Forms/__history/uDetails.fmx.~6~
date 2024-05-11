@@ -1,0 +1,11 @@
+object FrmDetails: TFrmDetails
+  Left = 0
+  Top = 0
+  ClientHeight = 500
+  ClientWidth = 375
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 3
+end

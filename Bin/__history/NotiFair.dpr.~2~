@@ -1,0 +1,13 @@
+program NotiFair;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms;
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.FormFactor.Orientations := [TFormOrientation.Portrait];
+  Application.Run;
+end.

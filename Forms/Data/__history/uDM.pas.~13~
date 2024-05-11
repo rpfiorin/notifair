@@ -1,0 +1,36 @@
+unit uDM;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Data.DB, DBAccess, Uni, UniProvider,
+  PostgreSQLUniProvider;
+
+type
+  TDmData = class(TDataModule)
+    uD_pgProv: TPostgreSQLUniProvider;
+    uDconn_pg: TUniConnection;
+
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DmData: TDmData;
+
+implementation
+
+{%CLASSGROUP 'FMX.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TDmData.DataModuleCreate(Sender: TObject);
+begin
+  // Conecta ao BD
+  uDconn_pg.Connect;
+end;
+
+end.

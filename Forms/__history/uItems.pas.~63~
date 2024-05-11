@@ -1,0 +1,118 @@
+unit uItems;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
+  FMX.Controls.Presentation, FMX.ListView.Types, FMX.ListView, Data.DB, MemDS,
+  DBAccess, Uni, uDM, Data.Bind.EngExt, Fmx.Bind.DBEngExt, System.Rtti,
+  System.Bindings.Outputs, Fmx.Bind.Editors, Data.Bind.Components, Data.Bind.DBScope;
+
+type
+  TFrmItems = class(TForm)
+    lblTop: TLabel;
+    btnTop: TButton;
+    tmrLoader: TTimer;
+    btnRefresh: TButton;
+    btnBack: TButton;
+    lblRefresh: TLabel;
+    lblGoBack: TLabel;
+    pnlBottom: TPanel;
+    lblTitle: TLabel;
+    tmrUpdate: TTimer;
+    uDAC_qryLv: TUniQuery;
+    lVitems: TListView;
+    lblIDlist: TLabel;
+    aInewList: TAniIndicator;
+
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure tmrLoaderTimer(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnRefreshClick(Sender: TObject);
+    procedure btnBackClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure lVitemsShow;
+    procedure tmrUpdateTimer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmItems: TFrmItems;
+  segundos: integer;
+
+implementation
+
+{$R *.fmx}
+
+uses uMain;
+
+procedure TFrmItems.btnBackClick(Sender: TObject);
+begin
+  // Fecha
+  self.Close;
+end;
+
+procedure TFrmItems.btnRefreshClick(Sender: TObject);
+begin
+  tmrLoader.Enabled := True;
+  uDAC_qryLv.Refresh;
+end;
+
+procedure TFrmItems.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  tmrUpdate.Enabled := False;
+
+  // Desaloca da memoria
+  FreeAndNil(FrmItems);
+end;
+
+procedure TFrmItems.FormCreate(Sender: TObject);
+begin
+  segundos := 0;
+  FrmMain.uDAC_qryLists.Refresh;
+end;
+
+procedure TFrmItems.FormShow(Sender: TObject);
+begin
+  tmrUpdate.Enabled := True;
+
+  lVitemsShow;
+end;
+
+procedure TFrmItems.lVitemsShow;
+begin
+//
+
+end;
+
+procedure TFrmItems.tmrLoaderTimer(Sender: TObject);
+begin
+ // Trata exibicao do Loader ao atulizar lista
+ aInewList.Enabled := True;
+ aInewList.Visible := True;
+ Application.ProcessMessages;
+
+ segundos := segundos+1;
+
+  if (segundos = 2) then
+  begin
+    aInewList.Visible := False;
+    aInewList.Enabled := False;
+    Application.ProcessMessages;
+
+    segundos := 0;
+    tmrLoader.Enabled := False;
+  end;
+end;
+
+procedure TFrmItems.tmrUpdateTimer(Sender: TObject);
+begin
+  uDAC_qryLv.Close;
+  uDAC_qryLv.Open;
+end;
+
+end.

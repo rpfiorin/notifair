@@ -1,0 +1,207 @@
+object FrmItemInfo: TFrmItemInfo
+  Left = 0
+  Top = 0
+  ClientHeight = 500
+  ClientWidth = 375
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object btnVersion: TButton
+    Position.X = -26.000000000000000000
+    Position.Y = -2.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TintColor = claAntiquewhite
+  end
+  object lblTop: TLabel
+    Align = Top
+    StyledSettings = [Style]
+    Size.Width = 375.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Roboto'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = claCoral
+  end
+  object btnTop: TButton
+    Align = Top
+    Position.Y = 30.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 130.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    TintColor = claCornsilk
+  end
+  object lblTitle: TLabel
+    StyledSettings = []
+    Position.X = 119.000000000000000000
+    Position.Y = 71.000000000000000000
+    Size.Width = 140.000000000000000000
+    Size.Height = 43.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Rockwell'
+    TextSettings.Font.Size = 30.000000000000000000
+    TextSettings.Font.Style = [fsBold, fsItalic]
+    TextSettings.FontColor = claCoral
+    Text = 'NotiFair'
+  end
+  object lblCopy: TLabel
+    StyledSettings = []
+    Position.X = 222.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 17.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Rockwell'
+    TextSettings.Font.Size = 11.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    TextSettings.FontColor = claCoral
+    Text = #169
+  end
+  object lbBg: TListBox
+    Align = Client
+    Size.Width = 375.000000000000000000
+    Size.Height = 340.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    DisableFocusEffect = True
+    DefaultItemStyles.ItemStyle = ''
+    DefaultItemStyles.GroupHeaderStyle = ''
+    DefaultItemStyles.GroupFooterStyle = ''
+    Viewport.Width = 375.000000000000000000
+    Viewport.Height = 340.000000000000000000
+    object btnSave: TButton
+      Align = Bottom
+      StyledSettings = []
+      Position.Y = 295.000000000000000000
+      Size.Width = 375.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claWhite
+      TintColor = claCoral
+      OnClick = btnSaveClick
+    end
+    object lblBrand: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 201.000000000000000000
+      Position.Y = 29.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Marca:'
+    end
+    object lblQtd: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 57.000000000000000000
+      Position.Y = 105.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Quantidade:'
+    end
+    object lblDur: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 200.000000000000000000
+      Position.Y = 105.000000000000000000
+      Size.Width = 96.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Dura'#231#227'o (dias):'
+    end
+    object edtDesc: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 5
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      Position.X = 56.000000000000000000
+      Position.Y = 53.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+    end
+    object lblDesc: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 57.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 72.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      Text = 'Descri'#231#227'o:'
+    end
+    object edtIDitem: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 7
+      Position.X = 248.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 57.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+    end
+    object btnDelItem: TButton
+      Align = Bottom
+      StyledSettings = [Family]
+      Position.Y = 250.000000000000000000
+      Size.Width = 375.000000000000000000
+      Size.Height = 45.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 8
+      Text = 'Excluir'
+      TextSettings.Font.Size = 14.000000000000000000
+      TextSettings.Font.Style = [fsBold]
+      TextSettings.FontColor = claWhite
+      TintColor = claCoral
+      Visible = False
+      OnClick = btnDelItemClick
+    end
+  end
+  object edtBrand: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 3
+    MaxLength = 9
+    TextSettings.Font.Size = 13.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Position.X = 200.000000000000000000
+    Position.Y = 213.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    StyledSettings = [FontColor]
+  end
+  object edtQtd: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 4
+    TextSettings.Font.Size = 13.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Position.X = 57.000000000000000000
+    Position.Y = 288.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    StyledSettings = [FontColor]
+  end
+  object edtDur: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 5
+    KeyboardType = NumberPad
+    MaxLength = 2
+    TextSettings.Font.Size = 13.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Position.X = 200.000000000000000000
+    Position.Y = 288.000000000000000000
+    Size.Width = 104.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    StyledSettings = [FontColor]
+  end
+end

@@ -1,0 +1,13 @@
+object DmData: TDmData
+  OldCreateOrder = False
+  Height = 150
+  Width = 215
+  object pgProv: TPostgreSQLUniProvider
+    Left = 120
+    Top = 56
+  end
+  object uDACconn_pg: TUniConnection
+    Left = 64
+    Top = 56
+  end
+end

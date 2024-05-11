@@ -1,0 +1,416 @@
+object FrmItem: TFrmItem
+  Left = 0
+  Top = 0
+  ClientHeight = 500
+  ClientWidth = 375
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object btnVersion: TButton
+    Position.X = -26.000000000000000000
+    Position.Y = -2.000000000000000000
+    Size.Width = 401.000000000000000000
+    Size.Height = 37.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 12
+    TintColor = claAntiquewhite
+  end
+  object btnTop: TButton
+    Align = Top
+    Position.Y = 30.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 130.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    TintColor = claCornsilk
+  end
+  object lblTop: TLabel
+    Align = Top
+    StyledSettings = [Style]
+    Size.Width = 375.000000000000000000
+    Size.Height = 30.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Roboto'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = claCoral
+    Text = ' DETALHES E ITENS DA LISTA'
+  end
+  object lblTitle: TLabel
+    StyledSettings = []
+    Position.X = 119.000000000000000000
+    Position.Y = 71.000000000000000000
+    Size.Width = 140.000000000000000000
+    Size.Height = 43.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Rockwell'
+    TextSettings.Font.Size = 30.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000200000004000000}
+    TextSettings.FontColor = claCoral
+    Text = 'NotiFair'
+  end
+  object btnBack: TButton
+    Position.X = 13.000000000000000000
+    Position.Y = 61.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'backtoolbutton'
+    TabOrder = 6
+    OnClick = btnBackClick
+  end
+  object lblGoBack: TLabel
+    StyledSettings = [Style, FontColor]
+    Position.X = 24.000000000000000000
+    Position.Y = 93.000000000000000000
+    Size.Width = 33.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 10.000000000000000000
+    Text = 'Voltar'
+  end
+  object btnRefresh: TButton
+    Position.X = 296.000000000000000000
+    Position.Y = 61.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'refreshtoolbutton'
+    TabOrder = 3
+    Text = 'btnRefresh'
+    OnClick = btnRefreshClick
+  end
+  object lblRefresh: TLabel
+    StyledSettings = [Style, FontColor]
+    Position.X = 299.000000000000000000
+    Position.Y = 93.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Segoe UI Semilight'
+    TextSettings.Font.Size = 10.000000000000000000
+    Text = 'Atualizar'
+  end
+  object pnlBottom: TPanel
+    Align = Bottom
+    Position.Y = 460.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 40.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object lVitemList: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Client
+    Size.Width = 375.000000000000000000
+    Size.Height = 158.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 7
+    ItemAppearance.ItemHeight = 45
+    ItemAppearanceObjects.ItemObjects.Text.Font.Family = 'Roboto'
+    ItemAppearanceObjects.ItemObjects.Text.Font.Size = 13.000000000000000000
+    ItemAppearanceObjects.ItemObjects.Text.Font.StyleExt = {00070000000000000004000000}
+    ShowSelection = False
+    object aInewList: TAniIndicator
+      Align = Center
+    end
+  end
+  object tmrUpdate: TTimer
+    Enabled = False
+    Interval = 10000
+    OnTimer = tmrUpdateTimer
+    Left = 192
+    Top = 3
+  end
+  object tmrLoader: TTimer
+    Enabled = False
+    OnTimer = tmrLoaderTimer
+    Left = 328
+    Top = 108
+  end
+  object lblCopy: TLabel
+    StyledSettings = []
+    Position.X = 222.000000000000000000
+    Position.Y = 88.000000000000000000
+    Size.Width = 17.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Rockwell'
+    TextSettings.Font.Size = 11.000000000000000000
+    TextSettings.Font.StyleExt = {00070000000000000004000000}
+    TextSettings.FontColor = claCoral
+    Text = #169
+  end
+  object pnlAbsItem: TPanel
+    Position.Y = 159.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 142.000000000000000000
+    Size.PlatformDefault = False
+    Visible = False
+    TabOrder = 18
+    object edtBrandItem: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      Text = 'Marca'
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 168.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+      OnEnter = edtBrandItemEnter
+      OnExit = edtBrandItemExit
+    end
+    object edtDurItem: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      KeyboardType = NumberPad
+      Text = 'Dura'#231#227'o (dias)'
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 168.000000000000000000
+      Position.Y = 81.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+      OnEnter = edtDurItemEnter
+      OnExit = edtDurItemExit
+    end
+    object edtQtdItem: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 2
+      KeyboardType = NumberPad
+      Text = 'Quantidade'
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 24.000000000000000000
+      Position.Y = 81.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+      OnEnter = edtQtdItemEnter
+      OnExit = edtQtdItemExit
+    end
+    object lblInfAbsItem: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 26.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 143.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 11.000000000000000000
+      Text = 'Preencha os dados do item:'
+    end
+    object edtDescItem: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 0
+      MaxLength = 9
+      Text = 'Descri'#231#227'o'
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 24.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+      OnEnter = edtDescItemEnter
+      OnExit = edtDescItemExit
+    end
+    object btnAddAbsItem: TButton
+      StyledSettings = [Family, FontColor]
+      Position.X = 304.000000000000000000
+      Position.Y = 39.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'toolbutton'
+      TabOrder = 6
+      Text = 'Salvar'
+      TextSettings.Font.Size = 10.000000000000000000
+      OnClick = btnAddAbsItemClick
+    end
+  end
+  object pnlListData: TPanel
+    Align = Top
+    Position.Y = 160.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 142.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 13
+    object lblListCode: TLabel
+      StyledSettings = [FontColor]
+      Position.X = 26.000000000000000000
+      Position.Y = 16.000000000000000000
+      Size.Width = 198.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 11.000000000000000000
+      Text = 'Digite o c'#243'digo da lista para detalhar:'
+    end
+    object edtListCode: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 1
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 224.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 49.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [Family, FontColor]
+    end
+    object btnSearchList: TButton
+      Position.X = 296.000000000000000000
+      Position.Y = -1.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'searchtoolbutton'
+      TabOrder = 2
+      Text = 'btnSearchList'
+      OnClick = btnSearchListClick
+    end
+    object edtCat: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 5
+      MaxLength = 9
+      Text = 'Categoria'
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 24.000000000000000000
+      Position.Y = 41.000000000000000000
+      Size.Width = 249.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+    end
+    object edtMonth: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 4
+      Text = 'M'#234's'
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 24.000000000000000000
+      Position.Y = 81.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+    end
+    object edtYear: TEdit
+      Touch.InteractiveGestures = [LongTap, DoubleTap]
+      TabOrder = 3
+      Text = 'Ano'
+      TextSettings.Font.Size = 13.000000000000000000
+      TextSettings.Font.StyleExt = {00070000000000000004000000}
+      Position.X = 168.000000000000000000
+      Position.Y = 81.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 32.000000000000000000
+      Size.PlatformDefault = False
+      StyledSettings = [FontColor]
+    end
+    object btnEdit: TButton
+      Enabled = False
+      Position.X = 296.000000000000000000
+      Position.Y = 64.000000000000000000
+      Size.Width = 48.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'composetoolbutton'
+      TabOrder = 6
+      Text = 'btnEdit'
+      OnClick = btnEditClick
+    end
+    object lblSearch: TLabel
+      StyledSettings = [Style, FontColor]
+      Position.X = 301.000000000000000000
+      Position.Y = 30.000000000000000000
+      Size.Width = 38.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semilight'
+      TextSettings.Font.Size = 10.000000000000000000
+      Text = 'Detalhar'
+    end
+    object lblEdit: TLabel
+      StyledSettings = [Style, FontColor]
+      Position.X = 305.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 28.000000000000000000
+      Size.Height = 23.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Family = 'Segoe UI Semilight'
+      TextSettings.Font.Size = 10.000000000000000000
+      Text = 'Editar'
+    end
+  end
+  object uDqry_ItemsLv: TUniQuery
+    Connection = DmData.uDconn_pg
+    SQL.Strings = (
+      'SELECT * FROM '
+      'item_lista'
+      'WHERE 1=1')
+    BeforeOpen = uDqry_ItemsLvBeforeOpen
+    Left = 208
+    Top = 313
+    object uDqry_ItemsLvid: TIntegerField
+      FieldName = 'id'
+    end
+    object uDqry_ItemsLvdescricao: TMemoField
+      FieldName = 'descricao'
+      Required = True
+      BlobType = ftMemo
+    end
+    object uDqry_ItemsLvmarca: TStringField
+      FieldName = 'marca'
+      Size = 30
+    end
+    object uDqry_ItemsLvquantidade: TStringField
+      FieldName = 'quantidade'
+      Required = True
+      Size = 10
+    end
+    object uDqry_ItemsLvdur_dias: TSmallintField
+      FieldName = 'dur_dias'
+      Required = True
+    end
+    object uDqry_ItemsLvfk_lista: TIntegerField
+      FieldName = 'fk_lista'
+      Required = True
+    end
+  end
+  object bsDB_Items: TBindSourceDB
+    DataSet = uDqry_ItemsLv
+    ScopeMappings = <>
+    Left = 328
+    Top = 314
+  end
+  object bl_Items: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 270
+    Top = 314
+    object LinkListControlToField1: TLinkListControlToField
+      Category = 'Quick Bindings'
+      DataSource = bsDB_Items
+      FieldName = 'descricao'
+      Control = lVitemList
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+end

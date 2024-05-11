@@ -1,0 +1,15 @@
+program NotiFair;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  uDmData in '..\Forms\Data\uDmData.pas' {DmData: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TDmData, DmData);
+  Application.FormFactor.Orientations := [TFormOrientation.Portrait];
+  Application.Run;
+end.

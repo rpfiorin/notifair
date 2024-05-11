@@ -1,0 +1,158 @@
+object FrmItems: TFrmItems
+  Left = 0
+  Top = 0
+  ClientHeight = 500
+  ClientWidth = 375
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnClose = FormClose
+  OnShow = FormShow
+  DesignerMasterStyle = 3
+  object lblTop: TLabel
+    Align = Top
+    StyledSettings = [Style]
+    Size.Width = 375.000000000000000000
+    Size.Height = 33.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = claCoral
+    Text = ' ITENS DA LISTA'
+  end
+  object btnTop: TButton
+    Align = Top
+    Position.Y = 33.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 130.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    TintColor = claCornsilk
+  end
+  object tmrLoader: TTimer
+    Enabled = False
+    OnTimer = tmrLoaderTimer
+    Left = 304
+    Top = 120
+  end
+  object btnRefresh: TButton
+    Position.X = 296.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'refreshtoolbutton'
+    TabOrder = 3
+    Text = 'btnRefresh'
+    OnClick = btnRefreshClick
+  end
+  object btnBack: TButton
+    Position.X = 16.000000000000000000
+    Position.Y = 64.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'backtoolbutton'
+    TabOrder = 5
+    OnClick = btnBackClick
+  end
+  object lblRefresh: TLabel
+    StyledSettings = [Style, FontColor]
+    Position.X = 299.000000000000000000
+    Position.Y = 97.000000000000000000
+    Size.Width = 48.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Segoe UI Semilight'
+    TextSettings.Font.Size = 10.000000000000000000
+    Text = 'Atualizar'
+  end
+  object lblGoBack: TLabel
+    StyledSettings = [Style, FontColor]
+    Position.X = 27.000000000000000000
+    Position.Y = 96.000000000000000000
+    Size.Width = 33.000000000000000000
+    Size.Height = 23.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Segoe UI Semilight'
+    TextSettings.Font.Size = 10.000000000000000000
+    Text = 'Voltar'
+  end
+  object pnlBottom: TPanel
+    Align = Bottom
+    Position.Y = 465.000000000000000000
+    Size.Width = 375.000000000000000000
+    Size.Height = 35.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+  end
+  object lblTitle: TLabel
+    StyledSettings = []
+    Position.X = 120.000000000000000000
+    Position.Y = 70.000000000000000000
+    Size.Width = 121.000000000000000000
+    Size.Height = 43.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Family = 'Rockwell'
+    TextSettings.Font.Size = 30.000000000000000000
+    TextSettings.Font.Style = [fsItalic]
+    TextSettings.FontColor = claCoral
+    Text = 'NotiFair'
+  end
+  object tmrUpdate: TTimer
+    Enabled = False
+    Interval = 5000
+    Left = 168
+    Top = 163
+  end
+  object lVitems: TListView
+    ItemAppearanceClassName = 'TListItemAppearance'
+    ItemEditAppearanceClassName = 'TListItemShowCheckAppearance'
+    HeaderAppearanceClassName = 'TListHeaderObjects'
+    FooterAppearanceClassName = 'TListHeaderObjects'
+    Align = Client
+    Size.Width = 375.000000000000000000
+    Size.Height = 302.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 10
+  end
+  object lblIDlist: TLabel
+    Position.X = 344.000000000000000000
+    Size.Width = 50.000000000000000000
+    Size.Height = 31.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'L'
+    Visible = False
+  end
+  object uDAC_qryLv: TUniQuery
+    Connection = DmData.uDAC_pgConn
+    SQL.Strings = (
+      'SELECT * FROM'
+      'public.item_lista')
+    Left = 168
+    Top = 35
+  end
+  object bsDBlV: TBindSourceDB
+    DataSet = uDAC_qryLv
+    ScopeMappings = <>
+    Left = 84
+    Top = 49
+  end
+  object bsLv: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 100
+    Top = 5
+    object LinkFillControlToField1: TLinkFillControlToField
+      Category = 'Quick Bindings'
+      Control = lVitems
+      Track = True
+      FillDataSource = bsDBlV
+      FillDisplayFieldName = 'descricao'
+      AutoFill = True
+      FillExpressions = <>
+      FillHeaderExpressions = <>
+      FillBreakGroups = <>
+    end
+  end
+end

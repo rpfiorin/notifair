@@ -1,0 +1,24 @@
+object DmData: TDmData
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 150
+  Width = 215
+  object pgProv: TPostgreSQLUniProvider
+    Left = 120
+    Top = 56
+  end
+  object uDconn_pg: TUniConnection
+    ProviderName = 'PostgreSQL'
+    Port = 5432
+    Database = 'aitstdoe'
+    Username = 'aitstdoe'
+    Server = 'tantor.db.elephantsql.com'
+    Connected = True
+    LoginPrompt = False
+    Left = 64
+    Top = 56
+    EncryptedPassword = 
+      'BCFF88FF94FFCCFFA6FFB8FF8CFF9CFF88FF91FFCCFFA9FFB8FF9CFFC9FFD2FF' +
+      'A6FFB1FF96FF89FF94FF8BFFB5FFB7FF9AFFA5FF91FF91FF8BFFBAFFB1FFA8FF'
+  end
+end
